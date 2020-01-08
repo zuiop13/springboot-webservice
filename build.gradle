@@ -1,0 +1,45 @@
+//스프링 부트를 연결하기 위한 빌더 스크립트
+buildscript{
+    //ext 전역변수 생성을 위한 키워드
+    ext{
+        springBootVersion = '2.1.7.RELEASE'
+    }
+    //해당 빌더의 저장소는 메이븐컨트롤러,제이센터를 이용하겠다.
+    repositories{
+        mavenCentral()
+        jcenter()
+    }
+    //종속할 곳을 클레스페스로 가져와서 설정한다.
+    dependencies{
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+    //앞서 선언한 플러그인 의존성들을 적용할 것인지 결정
+    apply plugin: 'java'
+    apply plugin: 'eclipse'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
+    group 'com.shjeong.book'
+    version '1.0-SNAPSHOT'
+    sourceCompatibility = 1.8
+
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+
+    dependencies {
+        compile('org.springframework.boot:spring-boot-starter-web')
+        testCompile('org.springframework.boot:spring-boot-starter-test')
+    }
+
+
+
+
+
+
+
+
+
+
