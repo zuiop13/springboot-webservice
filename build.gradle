@@ -23,13 +23,16 @@ buildscript{
     group 'com.shjeong.book'
     version '1.0-SNAPSHOT'
     sourceCompatibility = 1.8
-
+    //저장소
     repositories {
         mavenCentral()
         jcenter()
     }
-
+    //종속
     dependencies {
+        compile('org.springframework.boot:spring-boot-starter-data-jpa')
+        compile('com.h2database:h2')
+        compile('org.projectlombok:lombok')
         compile('org.springframework.boot:spring-boot-starter-web')
         testCompile('org.springframework.boot:spring-boot-starter-test')
     }
