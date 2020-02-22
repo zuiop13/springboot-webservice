@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Getter //getter
 @NoArgsConstructor //기본 생성자를 만들어주겠다.
 @Entity // 테이블과 링크 명시 (entity 클래스는 절대 setter 메소드를 만들지 않습니다. - 변경 값이 있으면 명확한 변경 메소드 추가)
-public class Posts {
+public class Posts extends BaseTimeEntity{
 
     @Id //key값 명시
     @GeneratedValue(strategy = GenerationType.IDENTITY) //pk생성 규칙을 나타낸다

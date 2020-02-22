@@ -34,8 +34,11 @@ buildscript{
         compile('com.h2database:h2')
         compile('org.projectlombok:lombok')
         compile('org.springframework.boot:spring-boot-starter-web')
+        compile('org.springframework.boot:spring-boot-starter-mustache')
         testCompile('org.springframework.boot:spring-boot-starter-test')
     }
+
+
 
 
 
