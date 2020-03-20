@@ -1,6 +1,5 @@
 package com.shjeong.admin.domain.user;
 
-//import com.jojoldu.book.springboot.domain.BaseTimeEntity;
 import com.shjeong.admin.domain.posts.BaseTimeEntity;
 import lombok.Builder;
 import lombok.Getter;
@@ -26,6 +25,9 @@ public class User extends BaseTimeEntity {
     @Column
     private String picture;
 
+    //jap로 데이터베이스로 저장할 떄 Enum값을 어떤 형태로 저장할지를 결정합니다.
+    //기본은 int
+    //int로 저장하면 무슨값인지 데이터베이스에서 확인을 못함 그래서 문자열로 바꿔줌.
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Role role;
