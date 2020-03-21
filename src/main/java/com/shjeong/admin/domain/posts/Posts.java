@@ -26,7 +26,7 @@ public class Posts extends BaseTimeEntity{
 
     private String author;
 
-    private String test01;
+    //private String test01;
 
     //해당 클래스의 빌더 패턴 클래스를 생성
     //생성자 상단에 선언시 생성자에 포함된 빌드만 빌더에 포함
