@@ -10,7 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.criteria.Order;
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
+//import javax.transaction.Transactional; //뭐지 ? 왜 이렇게되있지
 import java.util.List;
 import java.util.stream.Collectors;
 

@@ -1,11 +1,10 @@
 package com.shjeong.admin.config.auth;
 
-
+import lombok.RequiredArgsConstructor;
 import com.shjeong.admin.config.auth.dto.OAuthAttributes;
 import com.shjeong.admin.config.auth.dto.SessionUser;
 import com.shjeong.admin.domain.user.User;
 import com.shjeong.admin.domain.user.UserRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
