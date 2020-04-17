@@ -35,9 +35,6 @@ import java.util.List;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class PostsApiControllerTest {
 
-    @Autowired
-    private WebApplicationContext context;
-
     @LocalServerPort
     private int port;
 
@@ -46,6 +43,9 @@ public class PostsApiControllerTest {
 
     @Autowired
     private PostsRepository postsRepository;
+
+    @Autowired
+    private WebApplicationContext context;
 
     private MockMvc mvc;
 
@@ -58,31 +58,23 @@ public class PostsApiControllerTest {
     }
 
     @After
-    public void tearDown() throws  Exception
-    {
+    public void tearDown() throws Exception {
         postsRepository.deleteAll();
     }
 
     @Test
     @WithMockUser(roles="USER")
-    public void Posts_등록된다() throws Exception
-    {
+    public void Posts_등록된다() throws Exception {
+        //given
         String title = "title";
         String content = "content";
         PostsSaveRequestDto requestDto = PostsSaveRequestDto.builder()
-            .title(title)
-            .content(content)
-            .author("author")
-            .build();
+                .title(title)
+                .content(content)
+                .author("author")
+                .build();
 
         String url = "http://localhost:" + port + "/api/v1/posts";
-
-        //when
-        ResponseEntity<Long> responseEntity = restTemplate.postForEntity(url,requestDto,Long.class);
-
-        //then
-        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
-        assertThat(responseEntity.getBody()).isGreaterThan(0L);
 
         //when
         mvc.perform(post(url)
@@ -90,13 +82,11 @@ public class PostsApiControllerTest {
                 .content(new ObjectMapper().writeValueAsString(requestDto)))
                 .andExpect(status().isOk());
 
-
+        //then
         List<Posts> all = postsRepository.findAll();
         assertThat(all.get(0).getTitle()).isEqualTo(title);
         assertThat(all.get(0).getContent()).isEqualTo(content);
-
     }
-
 
     @Test
     @WithMockUser(roles="USER")
@@ -119,42 +109,15 @@ public class PostsApiControllerTest {
 
         String url = "http://localhost:" + port + "/api/v1/posts/" + updateId;
 
-        HttpEntity<PostsUpdateRequestDto> requestEntity = new HttpEntity<>(requestDto);
-
         //when
-        ResponseEntity<Long> responseEntity =
-                restTemplate.exchange(url
-                        ,HttpMethod.PUT
-                        ,requestEntity
-                        ,Long.class);
-        //then
-        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
-        assertThat(responseEntity.getBody()).isGreaterThan(0L);
+        mvc.perform(put(url)
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .content(new ObjectMapper().writeValueAsString(requestDto)))
+                .andExpect(status().isOk());
 
         //then
         List<Posts> all = postsRepository.findAll();
         assertThat(all.get(0).getTitle()).isEqualTo(expectedTitle);
         assertThat(all.get(0).getContent()).isEqualTo(expectedContent);
-    }
-
-
-    @Test
-    public void BaseTimeEntity_등록(){
-
-        //givne
-        LocalDateTime now = LocalDateTime.of(2019,6,4,0,0,0);
-        postsRepository.save(Posts.builder()
-        .title("title")
-        .content("content")
-        .author("author")
-        .build());
-
-        List<Posts> postsList = postsRepository.findAll();
-
-        //then
-        Posts posts = postsList.get(0);
-        System.out.println(">>>>>> createDate="+posts.getCreatedDate()+", modifiedDate="+posts.getModifiedDate());
-        assertThat(posts.getCreatedDate()).isAfter(now);
-        assertThat(posts.getModifiedDate()).isAfter(now);
     }
 }
