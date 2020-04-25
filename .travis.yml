@@ -41,7 +41,7 @@ deploy:
     application: springboot-webservice
     deployment_group: springboot-webservice-group
     region: ap-northeast-2
-    wait-nutil-deployed: true
+    wait-until-deployed: true
 
 
 
