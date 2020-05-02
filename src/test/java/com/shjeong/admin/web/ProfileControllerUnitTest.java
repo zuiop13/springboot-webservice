@@ -1,7 +1,15 @@
 package com.shjeong.admin.web;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.mock.env.MockEnvironment;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -44,7 +52,7 @@ public class ProfileControllerUnitTest {
     }
 
     @Test
-    public void active_profile이_없으면_default가_조회된다() {
+    public  void active_profile이_없으면_default가_조회된다() {
         //given
         String expectedProfile = "default";
         MockEnvironment env = new MockEnvironment();
